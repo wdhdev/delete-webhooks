@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- HTML Meta Tags -->
+        <title>Delete Webhooks</title>
+
+        <!-- Scripts -->
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body class="p-8 max-w-md m-auto bg-zinc-900 text-white text-center">
+        <main>
+            <h1 class="text-3xl font-bold mb-6">Delete Webhooks</h1>
+
+            <form id="form" onsubmit="deleteWebhook()">
+                <input type="url" id="webhook" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-600 mb-6" placeholder="Webhook URL" required>
+                <button type="submit" id="btn" class="bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Delete</button>
+            </form>
+        </main>
+
+        <footer class="mt-8">
+            <p>&copy; 2023 <span class="font-semibold">William Harrison</span> - All Rights Reserved.</p>
+        </footer>
+    </body>
+
+    <script>
+        const form = document.getElementById("form");
+        const webhook = document.getElementById("webhook");
+        const btn = document.getElementById("btn");
+
+        async function deleteWebhook() {
+            event.preventDefault();
+
+            btn.setAttribute("disabled", true);
+            btn.innerHTML = "Deleting...";
+
+            fetch(webhook.value, {
+                method: "DELETE"
+            }).then(res => {
+                form.reset();
+
+                btn.removeAttribute("disabled");
+                btn.innerHTML = "Delete";
+
+                if(res.status === 204) {
+                    alert("Webhook has been deleted!");
+                } else {
+                    alert("Webhook does not exist!");
+                }
+            })
+        }
+    </script>
+</html>
