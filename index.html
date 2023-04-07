@@ -17,7 +17,9 @@
             <h1 class="text-3xl font-bold mb-6">Delete Webhooks</h1>
 
             <form id="form" onsubmit="deleteWebhook()">
-                <input type="url" id="webhook" class="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-600 mb-6" placeholder="Webhook URL" required>
+                <label for="webhook" class="block mb-2 text-left text-sm font-medium text-gray-400">Webhook URL</label>
+                <input type="url" id="webhook" class="block p-3 w-full rounded-md text-sm bg-gray-700 border-gray-600 outline-none focus:outline-2 focus:outline-blue-600 mb-4" placeholder="https://discord.com/api/webhooks/..." required>
+
                 <button type="submit" id="btn" class="bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5">Delete</button>
             </form>
         </main>
@@ -34,6 +36,8 @@
 
         async function deleteWebhook() {
             event.preventDefault();
+
+            if(!webhook.value.startsWith("https://discord.com/api/webhooks/")) return alert("Please enter a valid Discord webhook URL!");
 
             btn.setAttribute("disabled", true);
             btn.innerHTML = "Deleting...";
