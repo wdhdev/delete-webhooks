@@ -10,18 +10,22 @@ async function deleteWebhook() {
     btn.setAttribute("disabled", true);
     btn.innerHTML = "Deleting...";
 
-    fetch(webhook.value, {
-        method: "DELETE"
-    }).then(res => {
-        form.reset();
+    try {
+        fetch(webhook.value, {
+            method: "DELETE"
+        }).then(res => {
+            form.reset();
 
-        btn.removeAttribute("disabled");
-        btn.innerHTML = "Delete";
+            btn.removeAttribute("disabled");
+            btn.innerHTML = "Delete";
 
-        if(res.status && res.status === 204) {
-            alert("Webhook has been deleted!");
-        } else {
-            alert("Webhook does not exist!");
-        }
-    })
+            if(res.status === 204) {
+                alert("Webhook has been deleted!");
+            } else {
+                alert("Webhook does not exist!");
+            }
+        })
+    } catch(err) {
+        alert("An error occurred!");
+    }
 }
