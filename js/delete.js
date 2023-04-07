@@ -12,7 +12,7 @@ async function deleteWebhook() {
 
     fetch(webhook.value, {
         method: "DELETE"
-    }).then(res => {
+    }).catch(() => { alert("An error occurred!"); }).then(res => {
         form.reset();
 
         btn.removeAttribute("disabled");
@@ -25,5 +25,5 @@ async function deleteWebhook() {
                 alert("Webhook does not exist!");
             }
         }
-    }).catch(err => { alert("An error occurred!"); })
+    })
 }
