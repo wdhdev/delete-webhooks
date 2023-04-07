@@ -18,7 +18,7 @@ async function deleteWebhook() {
         btn.removeAttribute("disabled");
         btn.innerHTML = "Delete";
 
-        if(res.status === 204) {
+        if(res.status && res.status === 204) {
             alert("Webhook has been deleted!");
         } else {
             alert("Webhook does not exist!");
