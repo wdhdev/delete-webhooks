@@ -5,7 +5,11 @@ const btn = document.getElementById("btn");
 async function deleteWebhook() {
     event.preventDefault();
 
-    if(!webhook.value.startsWith("https://discord.com/api/webhooks/")) return alert("Please enter a valid Discord webhook URL!");
+    if(!webhook.value.startsWith("https://discord.com/api/webhooks/")) {
+        alert("Please enter a valid Discord webhook URL!");
+        form.reset();
+        return;
+    }
 
     btn.setAttribute("disabled", true);
     btn.innerHTML = "Deleting...";
